@@ -13,13 +13,12 @@ export default function WriteReviewPage() {
   const [rating, setRating] = useState(0);
   const searchParams = useSearchParams();
 
-  const ratingFromURL = Number(searchParams.get("rating")) || 0;
+ const [ratingFromURL, setRatingFromURL] = useState(0);
 
   useEffect(() => {
-    if (ratingFromURL) {
-      setRating(ratingFromURL);
-    }
-  }, [ratingFromURL]);
+  const params = new URLSearchParams(window.location.search);
+  setRatingFromURL(Number(params.get("rating")) || 0);
+}, []);
 
   const ratingText = ["", "Terrible", "Bad", "Average", "Good", "Excellent"];
 
